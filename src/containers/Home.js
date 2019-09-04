@@ -1,11 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 
-import {addTodo} from '../store/actions/';
+import {addTodo, requestTodos} from '../store/actions/';
 
 const Home = props => {
-  const {todos, addTodo} = props;
+  const {todos, addTodo, requestTodos} = props;
   const [todo, setTodo] = useState('');
+
+  useEffect(() => {
+    requestTodos();
+  }, [requestTodos]);
 
   const handleFormSubmit = event => {
     event.preventDefault();
@@ -38,6 +42,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addTodo: text => dispatch(addTodo(text)),
+  requestTodos: () => dispatch(requestTodos()),
 });
 
 export default connect(

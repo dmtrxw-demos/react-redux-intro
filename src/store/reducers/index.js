@@ -1,4 +1,4 @@
-import {ADD_TODO} from '../actions/';
+import {ADD_TODO, RECEIVE_TODOS} from '../actions/';
 
 const initialState = {
   todos: [],
@@ -6,8 +6,10 @@ const initialState = {
 
 function todoReducer(state = initialState, action) {
   switch (action.type) {
+    case RECEIVE_TODOS:
+      return { ...state, todos: action.todos };
     case ADD_TODO:
-      return {todos: [...state.todos, action.text]};
+      return { ...state, todos: [...state.todos, action.text]};
     default:
       return state;
   }
